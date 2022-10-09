@@ -2,7 +2,7 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt 
 
-
+# TODO:  Hente ut koeffisienter 
 
 
 def generate_random_polynomial(deg):
@@ -24,7 +24,7 @@ y = np.array([10, 20, 5, 15, 40, 15])
 xplt = np.linspace(x[0], x[-1])
 yplt = np.array([], float)
 
-for xp in xplt:
+for xp in xplt: 
     yp = 0
     
     for xi, yi in zip(x, y):

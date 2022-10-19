@@ -1,39 +1,29 @@
+from cProfile import label
 import numpy as np
-import random
 import matplotlib.pyplot as plt 
 
-# TODO:  Hente ut koeffisienter 
+x_obs = np.array([0, 20, 40, 60, 80, 100])
+y_obs = np.array([10, 20, 5, 15, 40, 15])
 
+def getAlfa(x):
+    return np.array([x**i for i in range(len(x_obs-1))])
 
-def generate_random_polynomial(deg):
-    return np.random.random(deg+1)
+# f = np.dot(a. F)
+F = np.array([[x**i for x in x_obs] for i in range(len(x_obs)-1)])
+f = F@y_obs
+#coeffisientene til q. 
+print(f)
 
-def get_points_from_random_polynomial(intervall, coeffs):
-    x = random.sample(intervall, k=len(coeffs))
-    print(x)
-    y = np.sum(np.array([[c*dx**i for i, c in enumerate(coeffs)] for dx in x]), axis=1)
-    print(y)
-    return x, y
-    
-
-x = np.array([0, 20, 40, 60, 80, 100])
-y = np.array([10, 20, 5, 15, 40, 15])
-
-
-
-xplt = np.linspace(x[0], x[-1])
+xplt = np.linspace(x_obs[0], x_obs[-1], 101)
 yplt = np.array([], float)
 
 for xp in xplt: 
     yp = 0
-    
-    for xi, yi in zip(x, y):
-        yp += yi * np.prod((xp - x[x != xi])/(xi - x[x != xi]))
+    for xi, yi in zip(x_obs, y_obs):
+        yp += yi * np.prod((xp - x_obs[x_obs != xi])/(xi - x_obs[x_obs != xi]))
     yplt = np.append(yplt, yp)
 
-print(xplt)
-print(yplt)
-
-plt.plot(x, y, 'ro')
-plt.plot(xplt, yplt)
+plt.plot(x_obs, y_obs,' bo', label = "observations")
+plt.plot(xplt, yplt, 'r', label = 'estimate')
+plt.legend()
 plt.show()

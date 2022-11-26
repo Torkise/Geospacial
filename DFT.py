@@ -16,7 +16,7 @@ def get_y_val(a_0, x, N, L):
     return a_0 + 2*sum_ledd
 
 def DTF(x, y):
-    N = len(x)
+    N = len(y)
     L = math.floor(N/2)
     a_0 = (1/N)*sum(y)
     f = [a_0]
@@ -24,8 +24,9 @@ def DTF(x, y):
         f.append(a_n(N, L, l, y))
         f.append(b_n(N, L, l, y))
     print("f \n", f)
-    x = np.linspace(x[0], x[-1], 100)
+    x = np.linspace(x[0], x[-1], 10)
     y = [get_y_val(a_0, x_val, N, L) for x_val in x]
+    print(y)
     return x, y
     
         
@@ -34,9 +35,8 @@ def DTF(x, y):
 
 
 def __init__(x, y): 
-    x_hat, y_hat = DTF(x, y)
-    plt.plot(x, y, 'o',label = 'obs')
-    plt.plot(x_hat, y_hat, 'b', label = 'DFT')
+    x, y = DTF(x,y)
+    plt.plot(x, y, 'b', label = 'DFT')
     plt.legend()
     plt.show()
 

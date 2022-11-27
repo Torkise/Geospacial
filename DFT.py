@@ -24,10 +24,7 @@ def DTF(x, y):
         f.append(a_n(N, L, l, y))
         f.append(b_n(N, L, l, y))
     print("f \n", f)
-    x = np.linspace(x[0], x[-1], 10)
-    y = [get_y_val(a_0, x_val, N, L) for x_val in x]
-    print(y)
-    return x, y
+    return f
     
         
         
@@ -35,12 +32,9 @@ def DTF(x, y):
 
 
 def __init__(x, y): 
-    x, y = DTF(x,y)
-    plt.plot(x, y, 'b', label = 'DFT')
-    plt.legend()
-    plt.show()
+    f = DTF(x, y)
 
 
-x = [-2, 0, 2]
-y = [1, 3, -1]
+x = [0, 1, 2]
+y = [1.4, 0.35, -4]
 __init__(x, y)

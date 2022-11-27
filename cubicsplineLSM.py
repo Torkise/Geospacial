@@ -1,6 +1,6 @@
 import numpy as np
-x_obs = [0.0, 1.0, 1.5, 2]
-y_obs = [2.5, 2, -1, -2]
+x_obs = [0.2, 0.9, 1, 2]
+y_obs = [1, 2, -1, -4]
 k_val = [0, 1, 2]
 
 def sigma(x, k):

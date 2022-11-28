@@ -20,8 +20,10 @@ N = A.T@A
 a_hat = np.linalg.inv(N)@A.T@y_obs
 print("x_obs", x_obs)
 print("y obs", y_obs)
-print("A - matrice ####### \n", A, "\n N matrice = A.T dot A ########\n",N, "\n a hat #####\n",a_hat)
-    
+print("A - matrice ####### \n", A)
+print("A.T\n", A.T)
+print("N matrice = A.T dot A ########\n",N, "\n a hat #####\n",a_hat)
+
 def f(x, a_hat, k): 
     sum = 0 
     for i in range(len(k)):

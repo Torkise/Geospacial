@@ -19,7 +19,7 @@ def grid_var(variance, weights):
     if(sum(weights) == 0): return 0
     return (variance*sum([w**2 for w in weights ]))/(sum(weights)**2)
     
-grid_nodes = [[0, 0], [1, 1], [2, 2]]
+grid_nodes = [[0, 0]]
 grid_weights = []
 grid_dist = []
 grid_f = np.zeros(len(grid_nodes))

@@ -6,13 +6,16 @@ import math
 
 
 def a_n(N, L, l, y):
-    coeff = (1/2*N) if (N%2 == 0) else (1/N) 
-    return (coeff)*sum([y[k]*math.cos(2*math.pi*l*(k/N)) for k in range(N)])
+    if N%2 == 0 and l == L:
+        # N is Even 
+        return (1/(2*N))*sum([y[k]*((-1)**k)*math.cos(2*math.pi*l*(k/N)) for k in range(N)])
+    # N is Odd
+    else: 
+        return (1/N)*sum([y[k]*math.cos(2*math.pi*l*(k/N)) for k in range(N)])
 
 def b_n(N, L, l, y):
-    if (N%2 == 0): return 0
+    if (N%2 == 0 and l == L): return 0
     return (1/N)*sum([y[k]*math.sin(2*math.pi*l*(k/N)) for k in range(N)])       
-
 
 def get_y_val(x, f):
     sum_led = 0
@@ -22,9 +25,15 @@ def get_y_val(x, f):
         else:
             sum_led = sum_led + f[i]*math.cos(2*math.pi*x*(i+1)/2)
     return f[0] + 2*sum_led
-            
 
-def DTF(x, y):
+def B(f, i):
+    if i == 0:
+        return math.sqrt(f[0]**2)
+    if i == 1:
+        return math.sqrt(f[1]**2 + f[2]**2)
+    
+
+def DTF(y):
     N = len(y)
     L = math.floor(N/2)
     a_0 = (1/N)*sum(y)
@@ -45,20 +54,13 @@ def DTF(x, y):
      
 
 
-def __init__(x, y): 
-    f = DTF(x, y)
+def __init__(y): 
+    f = DTF(y)
+    print(B(f, 0))
+    print(B(f, 1))
 
 
 x = [0, 1, 2]
-y = [1.4, 0.35, -4]
-__init__(x, y)
+y = [0.1, 1.3, 0.8, 1.4]
+__init__(y)
 
-def lol(a):
-    return -3/4 + 2*(1.075*math.cos(2*math.pi*a)+1.25*math.sin(2*math.pi*a))
-
-b = np.linspace(-1, 1, 1001)
-c = [lol(b_val) for b_val in b]
-""""
-plt.plot(b, c)
-plt.show()
-"""

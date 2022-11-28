@@ -1,13 +1,13 @@
 import numpy as np
-x_obs = [0.2, 0.9, 1, 2]
-y_obs = [1, 2, -1, -4]
-k_val = [0, 1, 2]
+x_obs = [0, 0.2, 0.4, 0.5]
+y_obs = [2.5, 2, -1, -2]
+k_val = [0, 0.5]
 
 def sigma(x, k):
-    if abs(x-k) > 1:
+    if abs((x/0.5)-k) > 1:    
         return 0 
     else:
-        return 1 - abs(x-k)
+        return 1 - abs((x/0.5)-k)
     
 # Find a matrice 
 A = np.zeros((len(x_obs), len(k_val)))
@@ -41,6 +41,7 @@ var_0 = (v.T@v)/(len(x_obs)-len(k_val))
 var_all = var_0 * np.linalg.inv(N)
 print(var_0)
 print(var_all)
+"""
 D = np.array([[-1, 1, 0],[0, -1, 1]])
 print(D)
 
@@ -50,3 +51,5 @@ N_T = N + lam*N_D
 print("N_T = \n", N, "\n+ \n ",lam, "\n*\n", N_D  )
 
 print("N_T = \n", N_T)
+"""
+    

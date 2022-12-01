@@ -32,8 +32,8 @@ def LSM_gram_smith(x_obs, f_obs, monomials):
     return c
 #Run Scripts 
 #Define Variables 
-x_obs = [0, 1, 2]
-f_obs = [4/6, 1/6, 0]
+x_obs = [0, 1, 2, 3, 4, 5]
+f_obs = [5/6, 4/6,2/6, 0, 1/6, 0]
 monomials = [0, 1]
 coeff = LSM_gram_smith(x_obs, f_obs, monomials)
 x = np.linspace(x_obs[0], x_obs[-1], 1000)

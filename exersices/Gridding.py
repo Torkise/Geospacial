@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import math
 
-x_obs = [-1, -1/2, 1, 0.2]
-y_obs = [1, 1/2, 1, 0.3]
-f_obs = [1, 3, 2, 1]
+x_obs = [-1, -1/2, 1, 0.2, 0.3, 0.5, 0.8] 
+y_obs = [1, 1/2, 1, 0.3, 1, 2, 0.6, ]
+f_obs = [1, 3, 2, 1, 0, 2, 3]
 
 def weight(d):
     if d <= 1:
@@ -19,7 +19,7 @@ def grid_var(variance, weights):
     if(sum(weights) == 0): return 0
     return (variance*sum([w**2 for w in weights ]))/(sum(weights)**2)
     
-grid_nodes = [[0, 0]]
+grid_nodes = [[0, 0], [0, 1], [0,2], [1,0], [1, 1], [1, 2]]
 grid_weights = []
 grid_dist = []
 grid_f = np.zeros(len(grid_nodes))

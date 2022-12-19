@@ -3,23 +3,42 @@ import math
 
 t_i = np.array([0, 2, 4, 6, 8])
 ecf = np.array([12.14, 4.33, 0.42, 0.01, 0.001])
-exponential = False
-start_index = 1
-end_index = 2
+# False if Normal, True if exponential 
+exponential = True
+# Fill in the efc to solve the Least Square
+første_punkt = 1
+siste_punkt = 3
+rounding = 2
+t_i_lsm = np.array(t_i[første_punkt:siste_punkt+1])
+efc_lsm = np.array(ecf[første_punkt:siste_punkt+1])
 
+# Denne skal være transponert for å gi riktige verdier ifølge LF. Sjekk med Freddie 
 
-mat = np.array([[t_i[j] ** i for i in range(end_index)] for j in range(start_index, end_index+1)]).T
-# Calculation a hat 
-a_hat = np.array(ecf[start_index:end_index+1])@np.linalg.inv(mat)
+efc_c = np.array([[i**0, i**1, i**2] for i in t_i_lsm]).T
+
+# Calculation a_hat using LSM 
+a_hat = efc_lsm@np.linalg.inv(efc_c)
+for i in range(len(a_hat)):
+    a_hat[i] = round(a_hat[i], rounding)
 A_var_est = a_hat[0]
+
+
 print("a_hat=\n", a_hat)
-print("A est : ", A_var_est)
-alfa = -(math.log((ecf[start_index]/A_var_est)))/4
+print("A est : a_hat[0] = ", A_var_est)
+
+# Husk å sette exponetsiell til True / False 
+k = 1 if exponential else 2
+alfa = -(math.log((efc_lsm[0]/A_var_est)))/t_i_lsm[0]**k
+alfa = round(alfa, rounding)
 print("alfa = ", alfa)
 
 variance = ecf[0] - A_var_est
-print(variance)
+variance = round(variance, rounding)
+print("Variance = A - efc(0): ", variance)
 
-#Correlation Length
-l = math.log(2)/alfa
-print(l)
+# Sett opp Linearisering! 
+
+#Correlation Length    efc(tau) = 1/2 ecf(0)
+l = math.log(2)/alfa if exponential else math.sqrt(math.log(2)/alfa) 
+l = round(l, rounding)
+print("correlation length\n",l)
